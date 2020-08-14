@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <?php
 
 session_start();
@@ -66,13 +64,19 @@ $sql = "SELECT * FROM `progress` WHERE `Dept Name` = 'SRM PT PhD'";
          $R43c=$row['R4'];
          $R53c=$row['R5'];
          $R63c=$row['R6'];
-         $R34c=$row['sum']; ?>
+         $R34c=$row['sum'];
 
+$user = $_SESSION['username'];
+$sql = "SELECT *  FROM `privilage` WHERE `name` = '$user'";
+$retval = mysqli_query($conn, $sql);
+$privilege = mysqli_fetch_assoc($retval);
+?>
 
+<!DOCTYPE html>
 <html>
 
    <head>
-      <title>Edit Table Values</title>
+      <title>User Edit Table</title>
 			<link rel ="stylesheet" type= "text/css" href= "stylesheets/table.css">
 			<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
    </head>
@@ -81,42 +85,116 @@ $sql = "SELECT * FROM `progress` WHERE `Dept Name` = 'SRM PT PhD'";
      <form action="" method="post">
        <table>
           <tr class="head">
-             <td rowspan="3">Name of Unit / Dept.</th>
-             <td colspan="4">TARGETS</td>
-             <td rowspan="3">Academic Year 1 July to 30 June</td>
+            <td rowspan="3">Name of Unit / Dept.</th>
+            <td colspan="4">TARGETS</td>
+            <td rowspan="3">Academic Year 1 July to 30 June</td>
           </tr>
           <tr class="head1">
             <td colspan="4">PhD scholars enrolled / likely to be enrolled in that year only (Not cumulative)</td>
           </tr>
           <tr class="head2">
-             <td>2019-20 <br> Total PhD scholars on roll <br> as on 30.06.2020</td>
-             <td>2019-20 <br> (01.07.2019 - 30.06.2020) <br> Enrolled only in 2019-2020</td>
-             <td>2020-21 <br> (01.07.2020 - 30.06.2020) <br> Enrolled only in 2020-2021</td>
-             <td>2021-22 <br> (01.07.2021 - 30.06.2022) <br> Enrolled only in 2021-2022</td>
+						<td>2019-20 <br> Total PhD scholars on roll <br> as on 30.06.2020</td>
+            <td>2019-20 <br> (01.07.2019 - 30.06.2020) <br> Enrolled only in 2019-2020</td>
+            <td>2020-21 <br> (01.07.2020 - 30.06.2020) <br> Enrolled only in 2020-2021</td>
+            <td>2021-22 <br> (01.07.2021 - 30.06.2022) <br> Enrolled only in 2021-2022</td>
           </tr>
           <tr class="odd">
             <td>FT PhD Scholars</td>
-            <td><input type="text" name="enrolled30F" value="<?php echo $enrolled301a; ?>"></td>
-            <td><input type="text" name="enrolled19F" value="<?php echo $enrolled191a; ?>"></td>
-            <td><input type="text" name="enrolled20F" value="<?php echo $enrolled201a; ?>"></td>
-            <td><input type="text" name="enrolled21F" value="<?php echo $enrolled211a; ?>"></td>
+						<?php
+						if ($privilege['enrolled_on_30.06'] == '1') {
+							echo '<td><input  type="text" name="enrolled30F" value='.$enrolled301a.'> </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled30F" value='.$enrolled301a.' readonly></td>';
+						}
+						if ($privilege['enrolled_on_19-20'] == '1') {
+							echo '<td><input  type="text" name="enrolled19F" value='.$enrolled191a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled19F" value='.$enrolled191a.' readonly></td>';
+						}
+						if ($privilege['enrolled_on_20-21'] == '1') {
+							echo '<td><input  type="text" name="enrolled20F" value='.$enrolled201a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"name="enrolled20F" value='.$enrolled201a.' readonly></td>';
+						}
+						if ($privilege['enrolled _on_21-22'] == '1') {
+							echo '<td><input  type="text" name="enrolled21F" value='.$enrolled211a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled21F" value='.$enrolled211a.' readonly></td>';
+						}
+						?>
             <td></td>
-          </tr>
-          <tr class="even">
-            <td>All PT PhD Scholars</td>
-            <td><input type="text" name="enrolled30P"value="<?php echo $enrolled302b; ?>"></td>
-            <td><input type="text" name="enrolled19P"value="<?php echo $enrolled192b; ?>"></td>
-            <td><input type="text" name="enrolled20P"value="<?php echo $enrolled202b; ?>"></td>
-            <td><input type="text" name="enrolled21P"value="<?php echo $enrolled212b; ?>"></td>
-            <td></td>
-          </tr>
+					</tr>
+
+					<tr class="even">
+						<td>All PT PhD Scholars</td>
+						<?php
+						if ($privilege['enrolled_on_30.06'] == '1') {
+							echo '<td><input  type="text" name="enrolled30P" value='.$enrolled302b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"  name="enrolled30P" value='.$enrolled302b.' readonly></td>';
+						}
+
+						if ($privilege['enrolled_on_19-20'] == '1') {
+							echo '<td><input  type="text" name="enrolled19P" value='.$enrolled192b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled19P" value='.$enrolled192b.' readonly></td>';
+						}
+
+						if ($privilege['enrolled_on_20-21'] == '1') {
+							echo '<td><input  type="text" name="enrolled20P" value='.$enrolled202b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled20P" value='.$enrolled202b.' readonly></td>';
+						}
+
+						if ($privilege['enrolled _on_21-22'] == '1') {
+							echo '<td><input  type="text" name="enrolled21P" value='.$enrolled212b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"  name="enrolled21P" value='.$enrolled212b.' readonly></td>';
+						}
+						?>
+						<td></td>
+					</tr>
+
           <tr class="odd">
             <td>SRM PT PhD Scholars</td>
-            <td><input type="text" name="enrolled30S"value="<?php echo $enrolled303c; ?>"></td>
-            <td><input type="text" name="enrolled19S"value="<?php echo $enrolled193c; ?>"></td>
-            <td><input type="text" name="enrolled20S"value="<?php echo $enrolled203c; ?>"></td>
-            <td><input type="text" name="enrolled21S"value="<?php echo $enrolled213c; ?>"></td>
-            <td></td>
+						<?php
+						if ($privilege['enrolled_on_30.06'] == '1') {
+							echo '<td><input  type="text" name="enrolled30S" value='.$enrolled303c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled30S" value='.$enrolled303c.' readonly></td>';
+						}
+
+						if ($privilege['enrolled_on_19-20'] == '1') {
+							echo '<td><input  type="text" name="enrolled19S" value='.$enrolled193c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled19S" value='.$enrolled193c.' readonly></td>';
+						}
+
+						if ($privilege['enrolled_on_20-21'] == '1') {
+							echo '<td><input  type="text" name="enrolled20S" value='.$enrolled203c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"  name="enrolled20S" value='.$enrolled203c.' readonly></td>';
+						}
+
+						if ($privilege['enrolled _on_21-22'] == '1') {
+							echo '<td><input  type="text" name="enrolled21S" value='.$enrolled213c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="enrolled21S" value='.$enrolled213c.' readonly></td>';
+						}
+						?>
+						<td></td>
           </tr>
        </table>
 
@@ -144,38 +222,147 @@ $sql = "SELECT * FROM `progress` WHERE `Dept Name` = 'SRM PT PhD'";
  				</tr>
           <tr class="odd">
             <td class="odd">FT PhD Scholars</td>
-            <td><input type="text" name="R1F"value="<?php echo $R11a; ?>"></td>
-            <td><input type="text" name="R2F"value="<?php echo $R21a; ?>"></td>
-            <td><input type="text" name="R3F"value="<?php echo $R31a; ?>"></td>
-            <td><input type="text" name="R4F"value="<?php echo $R41a; ?>"></td>
-            <td><input type="text" name="R5F"value="<?php echo $R51a; ?>"></td>
-            <td><input type="text" name="R6F"value="<?php echo $R61a; ?>"></td>
-            <td></td>
+						<?php
+						if ($privilege['R1'] == '1') {
+							echo '<td><input  type="text" name="R1F" value='.$R11a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R1F" value='.$R11a.' readonly></td>';
+						}
+
+						if ($privilege['R2'] == '1') {
+							echo '<td><input  type="text" name="R2F" value='.$R21a.' > </td>';
+						}
+						else {echo '<td> <input type="text" style="border:hidden;" name="R2F" value='.$R21a.' readonly></td>';}
+
+						if ($privilege['R3'] == '1') {
+							echo '<td><input  type="text" name="R3F" value='.$R31a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R3F" value='.$R31a.' readonly></td>';
+						}
+						if ($privilege['R4'] == '1') {
+							echo '<td><input  type="text" name="R4F" value='.$R41a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R4F" value='.$R41a.' readonly></td>';
+						}
+
+						if ($privilege['R5'] == '1') {
+							echo '<td><input  type="text" name="R5F" value='.$R51a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R5F" value='.$R51a.' readonly></td>';
+						}
+
+						if ($privilege['R6'] == '1') {
+							echo '<td><input  type="text" name="R6F" value='.$R61a.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R6F" value='.$R61a.' readonly></td>';
+						}
+						?>
+						<td></td>
           </tr>
+
           <tr class="even">
             <td>All PT PhD Scholars</td>
-            <td><input type="text" name="R1P"value="<?php echo $R12b; ?>"></td>
-            <td><input type="text" name="R2P"value="<?php echo $R22b; ?>"></td>
-            <td><input type="text" name="R3P"value="<?php echo $R32b; ?>"></td>
-            <td><input type="text" name="R4P"value="<?php echo $R42b; ?>"></td>
-            <td><input type="text" name="R5P"value="<?php echo $R52b; ?>"></td>
-            <td><input type="text" name="R6P"value="<?php echo $R62b; ?>"></td>
-            <td></td>
+						<?php
+						if ($privilege['R1'] == '1') {
+							echo '<td><input  type="text" name="R1P" value='.$R12b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R1P" value='.$R12b.' readonly></td>';
+						}
+
+						if ($privilege['R2'] == '1') {
+							echo '<td><input  type="text" name="R2P" value='.$R22b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R2P" value='.$R22b.' readonly></td>';
+						}
+
+						if ($privilege['R3'] == '1') {
+							echo '<td><input  type="text" name="R3P" value='.$R32b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R3P" value='.$R32b.' readonly></td>';
+						}
+
+						if ($privilege['R4'] == '1') {
+							echo '<td><input  type="text" name="R4P" value='.$R42b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R4P" value='.$R42b.' readonly></td>';
+						}
+
+						if ($privilege['R5'] == '1') {
+							echo '<td><input  type="text" name="R5P" value='.$R52b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R5P" value='.$R52b.' readonly></td>';
+						}
+
+						if ($privilege['R6'] == '1') {
+							echo '<td><input  type="text" name="R6P" value='.$R62b.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"  name="R6P" value='.$R62b.' readonly></td>';
+						}
+						?>
+						<td></td>
           </tr>
+
           <tr class="odd">
             <td>SRM PT PhD Scholars</td>
-            <td><input type="text" name="R1S" value="<?php echo $R13c; ?>"></td>
-            <td><input type="text" name="R2S" value="<?php echo $R23c; ?>"></td>
-            <td><input type="text" name="R3S" value="<?php echo $R33c; ?>"></td>
-            <td><input type="text" name="R4S" value="<?php echo $R43c; ?>"></td>
-            <td><input type="text" name="R5S" value="<?php echo $R53c; ?>"></td>
-            <td><input type="text" name="R6S" value="<?php echo $R63c; ?>"></td>
-            <td></td>
+						<?php
+						if ($privilege['R1'] == '1') {
+							echo '<td><input  type="text" name="R1S" value='.$R13c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R1S" value='.$R13c.' readonly></td>';
+						}
+
+						if ($privilege['R2'] == '1') {
+							echo '<td><input  type="text" name="R2S" value='.$R23c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"name="R2S" value='.$R23c.' readonly></td>';
+						}
+
+						if ($privilege['R3'] == '1') {
+							echo '<td><input  type="text" name="R3S" value='.$R33c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;"  name="R3S" value='.$R33c.' readonly></td>';
+						}
+
+						if ($privilege['R4'] == '1') {
+							echo '<td><input  type="text" name="R4S" value='.$R43c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R4S" value='.$R43c.' readonly></td>';
+						}
+
+						if ($privilege['R5'] == '1') {
+							echo '<td><input  type="text" name="R5S" value='.$R53c.' > </td>';
+						}
+						else {
+							echo '<td> <input type="text" style="border:hidden;" name="R5S" value='.$R53c.' readonly></td>';
+						}
+
+           if ($privilege['R6'] == '1') {
+						 echo '<td><input  type="text" name="R6S" value='.$R63c.' > </td>';
+					 }
+					 else {
+						 echo '<td> <input type="text" style="border:hidden;" name="R6S" value='.$R63c.' readonly></td>';
+					 }
+					 ?>
+					 <td></td>
           </tr>
         </table>
 
-				<p align="center">
-          <a href="displaytable.php" class="btn btn-primary">CANCEL</a>
+				<p align="center"><a href="displaytable.php" class="btn btn-primary">CANCEL</a>
         <input class="btn btn-primary" type="submit" value="SUBMIT" name="submit">
 				</p>
      </form>

@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-
 <?php
 
 session_start();
 if(!isset($_SESSION['username'])) {
 	header('location:logout.php');
 }
-
 ?>
 
 <?php include 'config.php' ?>
+
+<!DOCTYPE html>
 <html>
 
    <head>
@@ -144,8 +143,13 @@ if(!isset($_SESSION['username'])) {
            ?>
         </tr>
       </table>
-			<?php if ($_SESSION['role'] == 'admin') {
+			<?php
+			if ($_SESSION['role'] != 'user') {
 				echo "<p align='center'><a href='edittable.php' class='btn btn-primary'>EDIT / INSERT</a></p>";
-			} ?>
+			}
+			if ($_SESSION['role'] == 'admin') {
+				echo "<p align='center'><a href='usertable.php' class='btn btn-primary'>EDIT USER PRIVILEGES</a></p>";
+			}
+			?>
    </body>
 </html>

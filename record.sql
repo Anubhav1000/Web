@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2020 at 11:10 AM
+-- Generation Time: Aug 14, 2020 at 06:39 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `admintable` (
   `finame` text NOT NULL,
   `laname` text NOT NULL,
-  `name` text NOT NULL,
+  `name` varchar(10) NOT NULL,
   `password` varchar(5) NOT NULL,
-  `Email` varchar(10) NOT NULL,
+  `Email` varchar(30) NOT NULL,
   `role` text NOT NULL,
-  `con` varchar(11) NOT NULL,
+  `contact` varchar(20) NOT NULL,
   `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -42,10 +42,39 @@ CREATE TABLE `admintable` (
 -- Dumping data for table `admintable`
 --
 
-INSERT INTO `admintable` (`finame`, `laname`, `name`, `password`, `Email`, `role`, `con`, `dob`) VALUES
-('Baibhav', 'Singh', 'bs', 'bs', 'bs@bs.com', 'user', '9876543210', '2000-12-25'),
-('Purboshi ', 'Das', 'pd', 'pd', 'pd@gmail.c', 'admin', '8974561235', '1999-12-22'),
-('p', 'd', 'pur', 'pur', 'p@gmail.co', 'admin', '7854693210', '2001-05-12');
+INSERT INTO `admintable` (`finame`, `laname`, `name`, `password`, `Email`, `role`, `contact`, `dob`) VALUES
+('Baibhav ', 'Singh', 'admin', 'admin', 'baibhavsingh51@gmail.com', 'admin', '123456789', '1999-06-15'),
+('Baibhav', 'Singh', 'user', 'user', 'bs3551@srmist.edu.in', 'editor', '123456789', '2020-08-12'),
+('Baibhav', 'Singh', 'user2', 'user2', 'baibhavsingh51@gmail.com', 'user', '2147483647', '2020-08-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `privilage`
+--
+
+CREATE TABLE `privilage` (
+  `name` varchar(10) NOT NULL,
+  `enrolled_on_30.06` tinyint(1) NOT NULL,
+  `enrolled_on_19-20` tinyint(1) NOT NULL,
+  `enrolled_on_20-21` tinyint(1) NOT NULL,
+  `enrolled _on_21-22` tinyint(1) NOT NULL,
+  `R1` tinyint(1) NOT NULL,
+  `R2` tinyint(1) NOT NULL,
+  `R3` tinyint(1) NOT NULL,
+  `R4` tinyint(1) NOT NULL,
+  `R5` tinyint(1) NOT NULL,
+  `R6` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `privilage`
+--
+
+INSERT INTO `privilage` (`name`, `enrolled_on_30.06`, `enrolled_on_19-20`, `enrolled_on_20-21`, `enrolled _on_21-22`, `R1`, `R2`, `R3`, `R4`, `R5`, `R6`) VALUES
+('admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+('user', 0, 1, 0, 1, 0, 1, 0, 1, 0, 0),
+('user2', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -69,9 +98,9 @@ CREATE TABLE `progress` (
 --
 
 INSERT INTO `progress` (`Dept Name`, `R1`, `R2`, `R3`, `R4`, `R5`, `R6`, `sum`) VALUES
-('FT PhD', 6, 9, 89, 89, 8, 989, 1190),
-('PT PhD', 85, 989, 89898, 656, 52, 56, 91736),
-('SRM PT PhD', 5, 65, 98, 989, 898, 898, 2953);
+('FT PhD', 4, 8, 4, 8, 4, 4, 32),
+('PT PhD', 4, 8, 4, 8, 4, 4, 32),
+('SRM PT PhD', 4, 8, 4, 8, 4, 4, 32);
 
 -- --------------------------------------------------------
 
@@ -92,13 +121,25 @@ CREATE TABLE `targets` (
 --
 
 INSERT INTO `targets` (`dept_name`, `enrolled_on_30.06`, `enrolled_on_19-20`, `enrolled_on_20-21`, `enrolled _on_21-22`) VALUES
-('FT PhD', 12, 87, 87, 5),
-('PT PhD', 45, 6565, 54, 54),
-('SRM PT PhD', 65, 5, 8, 898);
+('FT PhD', 4, 48, 4, 8),
+('PT PhD', 4, 8, 4, 8),
+('SRM PT PhD', 4, 8, 4, 8);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admintable`
+--
+ALTER TABLE `admintable`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `privilage`
+--
+ALTER TABLE `privilage`
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `progress`

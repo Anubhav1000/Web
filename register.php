@@ -4,7 +4,7 @@ session_start(); ?>
 <html>
 <head>
   <title> Registration </title>
- 
+
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
    <style type= "text/css" >
 
@@ -129,10 +129,10 @@ border: none;
         <label class="form-group">Date of Birth</label>
         <input class="finame" style="color:grey; left:40px;top:-10px; width:192px;" type="date" name="dob"required>
         <label class="form-group" style=" margin-left:65px;">Contact Number</label>
-        <input class="finame" style=" left:29px;top:-10px;  width:202px;"  type="mobile" name="con" required>
+        <input class="finame" style=" left:29px;top:-10px;  width:202px;"  type="tel" name="mob" required>
       <div class="form-group">
         <label >Email Id</label>
-        <input class="email"  style="left:75px; top:-15px" type="Email" name="Email" required>
+        <input class="email"  style="left:75px; top:-15px" type="email" name="Email" required>
       </div>
       <div style="margin-left:190px; margin-top:3px;">
         <?php if (isset($_SESSION['error'])) {
@@ -144,7 +144,7 @@ border: none;
         <label>Username</label>
         <input class="finame" type="text" name="user" required>
       </div>
-      
+
       <div class="form-group">
         <label>Password</label>
         <input class="finame"  type="password" name="password" required >

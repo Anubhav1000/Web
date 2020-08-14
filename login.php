@@ -26,7 +26,7 @@ session_start(); ?>
               echo "<p>".$error."</p>";
             } ?>
             <button type="SUBMIT" class="btn btn-primary">LOGIN </button>
-            <a style="float :right" href="register.php"> Haven't Registerted yet?</a>
+            <a style="float :right" href="register.php">Haven't Registerted yet?</a>
           </form>
         </div>
       </div>
