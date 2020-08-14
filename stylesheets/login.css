@@ -1,0 +1,53 @@
+body{
+
+  background:linear-gradient(rgba(0, 0, 0,0), rgba(0, 0, 0,0)),url("../images/image1.jpeg") no-repeat !important ;
+    background-size: cover !important;
+    background-position: center !important;
+
+}
+
+.login-box{
+  max-width: 800px;
+  float: none;
+  margin: 100px auto;
+
+  top: 50%;
+  left: 50%;
+
+}
+
+.login-left{
+ /*background: rgba(211, 211, 211, 0.5);*/
+  padding: 30px;
+  margin-top: 90px;
+ margin-left: 200px;
+
+  height:325px;
+
+}
+
+input[type=text] , input[type=password] , input[type=Email]{
+  border: none;
+  border-bottom: 2px solid skyblue;
+  background-color: transparent;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  font-family: fontawesome;
+  font-size: 1.25em
+
+}
+
+.Register-box{
+  margin: 45px auto;
+   max-width: 700px;
+  padding:30px;
+
+}
+
+
+h2{
+
+   margin-top: 10px !important;
+   text-align: center;
+
+}

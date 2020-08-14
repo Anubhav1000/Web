@@ -1,0 +1,101 @@
+body{
+  background:linear-gradient(rgba(0, 0, 0,0), rgba(0, 0, 0,0)),url("../images/image1.jpeg") no-repeat !important ;
+    background-size: cover !important;
+    background-position: center !important;
+  font-family:sans-serif;
+  margin-top:40px;
+}
+.regform{
+  width:800px;
+  background-color:rgb(0,0,0,0);
+  margin:auto;
+  padding:35px 0px 40px 0px;
+
+  border-radius:15px 15px 0px 0px;
+}
+.main{
+  top:50px;
+  background-color: rgb(0,0,0,0);
+  width:800px;
+  margin:auto;
+}
+form{
+  padding:30px;
+}
+
+#form-group{
+  width: 100%;
+}
+
+.form-group{
+  margin-left:20px;
+  margin-top: 25px
+  width:125px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.finame{
+  position:relative;
+  left:110px;
+  top:100px;
+
+  line-height:40px;
+  border-radius:6px;
+  border: none;
+  border-bottom: 2px solid skyblue;
+  padding:0 22px;
+  font-size: 16px;
+}
+.laname{
+  position:relative;
+  left:500px;
+  top:-50px;
+  line-height:40px;
+  border-radius:6px;
+border: none;
+  border-bottom: 2px solid skyblue;
+  padding:0 22px;
+  font-size: 16px;
+}
+.filabel{
+  position:relative;
+  text-transform:capitalize;
+  font-size:15px;
+  left:185px;
+  top:-100px;
+   font-family: fontawesome;
+}
+.lalabel{
+  position:relative;
+  text-transform:capitalize;
+  font-size:15px;
+  left:187px;
+  top:-50px;
+  font-family: fontawesome;
+
+}
+.email{
+  position:relative;
+  left:100px;
+  top:-40px;
+  width:600px;
+  line-height:40px;
+ border: none;
+  border-bottom: 2px solid skyblue;
+  border-radius:6px;
+  padding:0 22px;
+  font-size: 16px;
+
+}
+.form{
+  position:relative;
+  text-transform:capitalize;
+  font-size:14px;
+  left:500px;
+  top:-125px;
+
+  width:200px;
+  font-size: 18px;
+  font-weight: 700;
+}
