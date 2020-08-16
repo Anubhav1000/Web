@@ -1,5 +1,6 @@
-<?php
-session_start(); ?>
+<?php session_start(); ?>
+
+
 <html>
 <head>
   <title>Login</title>
@@ -16,16 +17,18 @@ session_start(); ?>
           <h2>LOGIN</h2>
           <form action="validation.php" method="post">
             <div class="form-group">
-              <input type="text" name="user" class="form-control" placeholder= "&#xf007; Username" required>
+              <input type="text" name="username" class="form-control" placeholder=
+              "&#xf007; Username" required>
             </div>
             <div class="form-group">
-              <input type="password" name="password" class="form-control" placeholder= "&#xf023; Password"required>
+              <input type="password" name="password" class="form-control"
+              placeholder= "&#xf023; Password" required>
             </div>
             <?php if (isset($_SESSION['error'])) {
               $error = $_SESSION['error'];
               echo "<p>".$error."</p>";
             } ?>
-            <button type="SUBMIT" class="btn btn-primary">LOGIN </button>
+            <button type="SUBMIT" class="btn btn-primary">LOGIN</button>
             <a style="float :right" href="register.php">Haven't Registerted yet?</a>
           </form>
         </div>
@@ -33,6 +36,7 @@ session_start(); ?>
     </div>
   </div>
 </body>
+
 </html>
 
 <?php unset($_SESSION['error']); ?>
