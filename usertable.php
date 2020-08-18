@@ -1,5 +1,6 @@
 <?php include 'config.php';
-session_start();
+include 'navbar.php'; 
+
 if(!isset($_SESSION['username']) || ($_SESSION['role'] == 'user')) {
 	header('location:logout.php');
 } ?>
@@ -10,7 +11,6 @@ if(!isset($_SESSION['username']) || ($_SESSION['role'] == 'user')) {
 <head>
 	<title>USER LIST</title>
 	<meta charset = "utf-8">
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href= "stylesheets/table.css">
 </head>
 
@@ -32,12 +32,11 @@ if(!isset($_SESSION['username']) || ($_SESSION['role'] == 'user')) {
 				echo '<td>'.$row['lastname'].'</td>';
 				echo '<td>'.$row['email'].'</td>';
 				echo '<td>'.$row['contact'].'</td>';
-				echo "<td><p><a href='selectprivileges.php?user=".$row['username']."
+				echo "<td style='padding-top:10px'><p><a href='selectprivileges.php?user=".$row['username']."
 				 'class='btn btn-primary'>View / Edit Privilege</a></p></td>";
 				echo '</tr>';
 			} ?>
        </tbody>
      </table>
-     <p align='center'><a href='displaytable.php' class='btn btn-primary'>BACK</a></p>
    </body>
 </html>

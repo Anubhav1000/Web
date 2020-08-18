@@ -1,0 +1,21 @@
+#logout {
+    position: absolute;
+    top: 30%;
+    left: 93%;
+    background-color:blue;
+    color:#AFEEEE;
+    font-weight: 700;
+  }
+.dropdown-menu
+{
+    background-color: #B0E0E8 !important;
+}
+#a1
+{
+    background-color: #B0E0E8 !important;
+}
+#a2
+{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2.2em;
+}

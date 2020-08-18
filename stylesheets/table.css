@@ -8,6 +8,7 @@ table {
   border-spacing: 3px;
   border-radius: 15px;
   text-align: center;
+  box-shadow: 0 12px 5px rgba(32,32,32,.3);
 }
 
 tr.odd {
@@ -46,11 +47,6 @@ input[type="text"] {
   text-align: center;
 }
 
-#logout {
-  position: absolute;
-  top: 3%;
-  left: 93%;
-}
 #save{
   border-top:4px solid skyblue;
 background:skyblue;

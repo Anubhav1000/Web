@@ -1,21 +1,22 @@
-<?php session_start();
+<?php include 'config.php';
+include 'navbar.php';
+
 if(!isset($_SESSION['username'])) {
 	header('location:logout.php');
 }
-include 'config.php' ?>
+
+$branch = $_GET['branch']; ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
       <title>Your Table</title>
-			<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 			<link rel="stylesheet" type="text/css" href= "stylesheets/table.css">
+			<link rel="stylesheet" type="text/css" href= "stylesheets/font.css">
 </head>
 
 <body>
-	<button class="btn btn-primary" onclick="document.location='logout.php'"
-	id="logout">LOGOUT</button>
 	 <table>
 			<tr class="head">
 				 <td rowspan="3">Name of Unit / Dept.</th>
@@ -34,7 +35,7 @@ include 'config.php' ?>
 			</tr>
 			<tr class="odd">
 				<td>FT PhD Scholars</td>
-				<?php $sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'FT PhD'";
+				<?php $sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'FT PhD'";
 				$retval = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($retval);
 				echo '<td>'.$row['enrolled_on_30.06'].'</td>';
@@ -45,19 +46,18 @@ include 'config.php' ?>
 			</tr>
 			<tr class="even">
 				<td>All PT PhD Scholars</td>
-				<?php $sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'PT PhD'";
+				<?php $sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'PT PhD'";
 				$retval = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($retval);
 				echo '<td>'.$row['enrolled_on_30.06'].'</td>';
 				echo '<td>'.$row['enrolled_on_19-20'].'</td>';
 				echo '<td>'.$row['enrolled_on_20-21'].'</td>';
-				echo '<td>'.$row['enrolled_on_21-22'].'</td>';
-				 ?>
+				echo '<td>'.$row['enrolled_on_21-22'].'</td>'; ?>
 				 <td></td>
 			</tr>
 			<tr class="odd">
 				<td>SRM PT PhD Scholars</td>
-				<?php $sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'SRM PT PhD'";
+				<?php $sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'SRM PT PhD'";
 				$retval = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($retval);
 				echo '<td>'.$row['enrolled_on_30.06'].'</td>';
@@ -93,7 +93,7 @@ include 'config.php' ?>
 		 </tr>
 		 <tr class="odd">
 			 <td>FT PhD Scholars</td>
-			 <?php $sql = "SELECT * FROM `progress` WHERE `dept_name` = 'FT PhD'";
+			 <?php $sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'FT PhD'";
 			 $retval = mysqli_query($conn, $sql);
 			 $row=mysqli_fetch_assoc($retval);
 			 echo '<td>'.$row['review_1'].'</td>';
@@ -106,7 +106,7 @@ include 'config.php' ?>
 		 </tr>
 		 <tr class="even">
 			 <td>All PT PhD Scholars</td>
-			 <?php $sql = "SELECT * FROM `progress` WHERE `dept_name` = 'PT PhD'";
+			 <?php $sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'PT PhD'";
 			 $retval = mysqli_query($conn, $sql);
 			 $row=mysqli_fetch_assoc($retval);
 			 echo '<td>'.$row['review_1'].'</td>';
@@ -119,7 +119,7 @@ include 'config.php' ?>
 		 </tr>
 		 <tr class="odd">
 			 <td>SRM PT PhD Scholars</td>
-			 <?php $sql = "SELECT * FROM `progress` WHERE `dept_name` = 'SRM PT PhD'";
+			 <?php $sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'SRM PT PhD'";
 			 $retval = mysqli_query($conn, $sql);
 			 $row=mysqli_fetch_assoc($retval);
 			 echo '<td>'.$row['review_1'].'</td>';
@@ -131,13 +131,5 @@ include 'config.php' ?>
 			 echo '<td>'.$row['sum'].'</td>'; ?>
 		 </tr>
 	 </table>
-	 <?php if ($_SESSION['role'] != 'user') {
-		 echo "<p align='center'><a href='edittable.php' class='btn btn-primary'>
-		 EDIT / INSERT</a></p>";
-	 }
-	 if ($_SESSION['role'] == 'admin') {
-		 echo "<p align='center'><a href='usertable.php' class='btn btn-primary'>
-		 EDIT USER PRIVILEGES</a></p>";
-	 } ?>
 </body>
 </html>
