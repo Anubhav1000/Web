@@ -1,11 +1,13 @@
-<?php session_start();
+<?php include 'config.php';
+include 'navbar.php';
+
 if(!isset($_SESSION['username']) || ($_SESSION['role'] == 'user')) {
 	header('location:logout.php');
 }
 
-include 'config.php';
+$branch = $_GET['branch'];
 
-$sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'FT PhD'";
+$sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'FT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $enrolled_FT_30_06 = $row['enrolled_on_30.06'];
@@ -13,7 +15,7 @@ $enrolled_FT_19_20 = $row['enrolled_on_19-20'];
 $enrolled_FT_20_21 = $row['enrolled_on_20-21'];
 $enrolled_FT_21_22 = $row['enrolled_on_21-22'];
 
-$sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'PT PhD'";
+$sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'PT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $enrolled_PT_30_06 = $row['enrolled_on_30.06'];
@@ -21,7 +23,7 @@ $enrolled_PT_19_20 = $row['enrolled_on_19-20'];
 $enrolled_PT_20_21 = $row['enrolled_on_20-21'];
 $enrolled_PT_21_22 = $row['enrolled_on_21-22'];
 
-$sql = "SELECT *  FROM `targets` WHERE `dept_name` = 'SRM PT PhD'";
+$sql = "SELECT *  FROM `$branch` WHERE `dept_name` = 'SRM PT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $enrolled_SRM_30_06 = $row['enrolled_on_30.06'];
@@ -29,7 +31,7 @@ $enrolled_SRM_19_20 = $row['enrolled_on_19-20'];
 $enrolled_SRM_20_21 = $row['enrolled_on_20-21'];
 $enrolled_SRM_21_22 = $row['enrolled_on_21-22'];
 
-$sql = "SELECT * FROM `progress` WHERE `dept_name` = 'FT PhD'";
+$sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'FT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $FT_review_1 = $row['review_1'];
@@ -40,7 +42,7 @@ $FT_review_5 = $row['review_5'];
 $FT_review_6 = $row['review_6'];
 $FT_sum = $row['sum'];
 
-$sql = "SELECT * FROM `progress` WHERE `dept_name` = 'PT PhD'";
+$sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'PT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $PT_review_1 = $row['review_1'];
@@ -51,7 +53,7 @@ $PT_review_5 = $row['review_5'];
 $PT_review_6 = $row['review_6'];
 $PT_sum = $row['sum'];
 
-$sql = "SELECT * FROM `progress` WHERE `dept_name` = 'SRM PT PhD'";
+$sql = "SELECT * FROM `$branch` WHERE `dept_name` = 'SRM PT PhD'";
 $retval = mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($retval);
 $SRM_review_1 = $row['review_1'];
@@ -73,7 +75,6 @@ $privilege = mysqli_fetch_assoc($retval); ?>
 <head>
 	<title>User Edit Table</title>
 	<link rel ="stylesheet" type= "text/css" href= "stylesheets/table.css">
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -402,7 +403,7 @@ $privilege = mysqli_fetch_assoc($retval); ?>
 			</tr>
 		</table>
 
-		<p align="center"><a href="displaytable.php" class="btn btn-primary">CANCEL</a>
+		<p align="center">
 			<input class="btn btn-primary" type="submit" value="SUBMIT" name="submit">
 		</p>
 	</form>
@@ -412,27 +413,27 @@ $privilege = mysqli_fetch_assoc($retval); ?>
     $enrolled_FT_19_20 = $_POST['enrolled_FT_19_20'];
 		$enrolled_FT_20_21 = $_POST['enrolled_FT_20_21'];
 		$enrolled_FT_21_22 = $_POST['enrolled_FT_21_22'];
-		$targtFT = "UPDATE `targets` SET `enrolled_on_30.06` = '$enrolled_FT_30_06',
+		$targtFT = "UPDATE `$branch` SET `enrolled_on_30.06` = '$enrolled_FT_30_06',
 		 `enrolled_on_19-20` = '$enrolled_FT_19_20', `enrolled_on_20-21` = '$enrolled_FT_20_21',
-		 `enrolled_on_21-22` = '$enrolled_FT_21_22' WHERE `targets`.`dept_name` = 'FT PhD'";
+		 `enrolled_on_21-22` = '$enrolled_FT_21_22' WHERE `$branch`.`dept_name` = 'FT PhD'";
 		$retval = mysqli_query($conn, $targtFT);
 
 		$enrolled_PT_30_06 = $_POST['enrolled_PT_30_06'];
 		$enrolled_PT_19_20 = $_POST['enrolled_PT_19_20'];
 		$enrolled_PT_20_21 = $_POST['enrolled_PT_20_21'];
 		$enrolled_PT_21_22 = $_POST['enrolled_PT_21_22'];
-		$targtPT = "UPDATE `targets` SET `enrolled_on_30.06` = '$enrolled_PT_30_06',
+		$targtPT = "UPDATE `$branch` SET `enrolled_on_30.06` = '$enrolled_PT_30_06',
 		 `enrolled_on_19-20` = '$enrolled_PT_19_20', `enrolled_on_20-21` = '$enrolled_PT_20_21',
-		 `enrolled_on_21-22` = '$enrolled_PT_21_22' WHERE `targets`.`dept_name` = 'PT PhD'";
+		 `enrolled_on_21-22` = '$enrolled_PT_21_22' WHERE `$branch`.`dept_name` = 'PT PhD'";
 		$retval1 = mysqli_query($conn, $targtPT);
 
 		$enrolled_SRM_30_06 = $_POST['enrolled_SRM_30_06'];
 		$enrolled_SRM_19_20 = $_POST['enrolled_SRM_19_20'];
 		$enrolled_SRM_20_21 = $_POST['enrolled_SRM_20_21'];
 		$enrolled_SRM_21_22 = $_POST['enrolled_SRM_21_22'];
-		$targtSRMPT = "UPDATE `targets` SET `enrolled_on_30.06` = '$enrolled_SRM_30_06',
+		$targtSRMPT = "UPDATE `$branch` SET `enrolled_on_30.06` = '$enrolled_SRM_30_06',
 		 `enrolled_on_19-20` = '$enrolled_SRM_19_20', `enrolled_on_20-21` = '$enrolled_SRM_20_21',
-		 `enrolled_on_21-22` = '$enrolled_SRM_21_22' WHERE `targets`.`dept_name` = 'SRM PT PhD'";
+		 `enrolled_on_21-22` = '$enrolled_SRM_21_22' WHERE `$branch`.`dept_name` = 'SRM PT PhD'";
 		$retval3 = mysqli_query($conn, $targtSRMPT);
 
 		$FT_review_1 = $_POST['FT_review_1'];
@@ -443,9 +444,9 @@ $privilege = mysqli_fetch_assoc($retval); ?>
 		$FT_review_6 = $_POST['FT_review_6'];
 		$FT_sum = $FT_review_1 + $FT_review_2 + $FT_review_3 + $FT_review_4 +
 		 $FT_review_5 + $FT_review_6;
-		$prgFT = "UPDATE `progress` SET `review_1` = '$FT_review_1', `review_2` = '$FT_review_2',
+		$prgFT = "UPDATE `$branch` SET `review_1` = '$FT_review_1', `review_2` = '$FT_review_2',
 		 `review_3` = '$FT_review_3', `review_4` = '$FT_review_4', `review_5` = '$FT_review_5',
-		 `review_6` = '$FT_review_6', `sum` = '$FT_sum' WHERE `progress`.`dept_name` = 'FT PhD'";
+		 `review_6` = '$FT_review_6', `sum` = '$FT_sum' WHERE `$branch`.`dept_name` = 'FT PhD'";
 		$retval4 = mysqli_query($conn, $prgFT);
 
 		$PT_review_1 = $_POST['PT_review_1'];
@@ -456,9 +457,9 @@ $privilege = mysqli_fetch_assoc($retval); ?>
 		$PT_review_6 = $_POST['PT_review_6'];
 		$PT_sum = $PT_review_1 + $PT_review_2 + $PT_review_3 + $PT_review_4 +
 		 $PT_review_5 + $PT_review_6;
-		$prgPT = "UPDATE `progress` SET `review_1` = '$PT_review_1', `review_2` = '$PT_review_2',
+		$prgPT = "UPDATE `$branch` SET `review_1` = '$PT_review_1', `review_2` = '$PT_review_2',
 		 `review_3` = '$PT_review_3', `review_4` = '$PT_review_4', `review_5` = '$PT_review_5',
-		 `review_6` = '$PT_review_6', `sum` = '$PT_sum' WHERE `progress`.`dept_name` = 'PT PhD'";
+		 `review_6` = '$PT_review_6', `sum` = '$PT_sum' WHERE `$branch`.`dept_name` = 'PT PhD'";
 		$retval5 = mysqli_query($conn, $prgPT);
 
 		$SRM_review_1 = $_POST['SRM_review_1'];
@@ -469,14 +470,14 @@ $privilege = mysqli_fetch_assoc($retval); ?>
 		$SRM_review_6 = $_POST['SRM_review_6'];
 		$SRM_sum = $SRM_review_1 + $SRM_review_2 + $SRM_review_3 + $SRM_review_4 +
 		 $SRM_review_5 + $SRM_review_6;
-		$prgSRMPT = "UPDATE `progress` SET `review_1` = '$SRM_review_1', `review_2` = '$SRM_review_2',
+		$prgSRMPT = "UPDATE `$branch` SET `review_1` = '$SRM_review_1', `review_2` = '$SRM_review_2',
 		 `review_3` = '$SRM_review_3', `review_4` = '$SRM_review_4', `review_5` = '$SRM_review_5',
-		 `review_6` = '$SRM_review_6', `sum` = '$SRM_sum' WHERE `progress`.`dept_name` = 'SRM PT PhD'";
+		 `review_6` = '$SRM_review_6', `sum` = '$SRM_sum' WHERE `$branch`.`dept_name` = 'SRM PT PhD'";
 		$retval5 = mysqli_query($conn, $prgSRMPT);
 
 		if ($targtFT && $targtPT && $targtSRMPT && $prgFT && $prgPT && $prgSRMPT) {
 			echo "<script>alert('Data Insert Successful');
-			document.location.href='displaytable.php'</script>";
+			document.location.href='displaytable.php?branch=$branch'</script>";
 		}
 		else {
 			echo "<script>alert('Data Insert Failed');

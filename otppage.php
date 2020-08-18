@@ -23,7 +23,8 @@ if(!isset($_SESSION['username'])) {
           <h3 align="center" style="padding-left:50px"> <i>Verify your Email
 						Address by adding the OTP sent to your Email ID</i>&nbsp;</h3><br><br>
           <h4 align="center">OTP Authentication</h4><br>
-          <form action="otpverify.php" method="post">
+
+					<form action="otpverify.php" method="post">
             <div class="form-group">
               <input type="number" name="otp" class="form-control" placeholder=
 							"One Time Password" required>
@@ -33,8 +34,9 @@ if(!isset($_SESSION['username'])) {
               echo "<p>".$error."</p>";
             } ?><br>
             <button type="SUBMIT" class="btn btn-primary">SUBMIT</button>
-          </form>
-        </div>
+					</form>
+
+				</div>
       </div>
     </div>
   </div>

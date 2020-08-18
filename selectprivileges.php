@@ -1,5 +1,6 @@
-<?php session_start();
-include 'config.php';
+<?php include 'config.php';
+include 'navbar.php';
+
 if(!isset($_SESSION['username']) || ($_SESSION['role'] == 'user')) {
 	header('location:logout.php');
 }
@@ -13,7 +14,6 @@ $retval = mysqli_fetch_assoc($res); ?>
 <html>
 <head>
 	<title>Select columns to give edit access</title>
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href= "stylesheets/table.css">
 </head>
 
@@ -110,7 +110,9 @@ $retval = mysqli_fetch_assoc($res); ?>
 			</tr>
 		</table>
 
-		<input class="btn btn-primary" type="submit" value="SUBMIT" name="submit">
+		<p align='center'>
+			<input class="btn btn-primary" type="submit" value="SUBMIT" name="submit">
+		</p>
 	</form>
 </body>
 </html>

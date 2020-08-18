@@ -18,14 +18,19 @@ $sql = "SELECT * FROM `admintable` WHERE `username` = '$username' AND `password`
 $result = mysqli_query($conn, $sql);
 $num = mysqli_num_rows($result);
 $retval = mysqli_fetch_assoc($result);
-
+$branch = $retval['branch'];
 
 if ($num == 1) {
 	$_SESSION['username'] = $username;
 	$_SESSION['role'] = $retval['role'];
+	$_SESSION['branch'] = $branch;
 
 	if ($_COOKIE["username"] == $_SESSION['username']) {
-		header('location:displaytable.php');
+		if ($retval['role'] == 'admin') {
+			header("location:home.php");
+			die();
+		}
+		header("location:displaytable.php?branch=$branch");
 		die();
 	}
 
